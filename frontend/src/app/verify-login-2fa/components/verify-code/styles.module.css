@@ -1,0 +1,11 @@
+.codeInputContainer input{
+    border: 2px solid black;
+    padding: 5px;
+    width: 2em !important;
+    color: black !important;
+    border-radius: 5px;
+}
+.codeInputContainer span{
+   color: white !important;
+   margin-inline: 5px;
+}

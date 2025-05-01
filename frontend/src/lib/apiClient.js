@@ -1,6 +1,6 @@
 'use client'
 import axios from 'axios';
-import {  signOut} from 'next-auth/react';
+import {signOut} from 'next-auth/react';
 
 
 let authToken = null;
@@ -31,16 +31,18 @@ apiClient.interceptors.response.use(
   (response) => {
     return response;
   },
-  (error) => {
+  async(error) => {
     if (error.response) {
       const { status } = error.response;
       if (status === 401) {
-        console.error("Unauthorized request - Signing out...");
-          signOut();
-       
+       await signOut({ callbackUrl: '/login',redirect:true});
+       window.location.replace('/login');
+      console.error(`API Error: ${status}`, error.response.data);
       }
-      // console.error(`API Error: ${status}`, error.response.data);
+      else {
+        console.error(`API Error: ${status}`, error.response.data);
       return Promise.reject(error.response.data || 'Beklenmeyen bir hata oluştu.');
+      }
     } else if (error.request) {
       console.error('Network Error or No Response:', error.message);
     } else {

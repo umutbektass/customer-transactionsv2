@@ -6,7 +6,6 @@ import apiClient from "../../lib/apiClient";
 export const addCustomer = async (data) => {
     try {
       const response = await apiClient.post('/api/customers', data);
-      console.log("API Response Data:", response.data);
       return response.data; 
     } catch (error) {
       console.error("API Error in verifyTwoLogin:", error);
@@ -36,7 +35,7 @@ export const getAllCustomers = async () => {
 
 export const getCustomerById = async (id) => {
   try {
-    const response = await apiClient.put(`/api/customers/${id}`); // Tip belirtmeden istek
+    const response = await apiClient.get(`/api/customers/${id}`); // Tip belirtmeden istek
     if (response.status && response.data) {
        return response.data.customer; 
     } else {
